@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: monitor-ms-example
+  profiles:
+    active: default
+  main:    allow-bean-definition-overriding: true  cloud:    kubernetes:      config:        name: monitor-ms-example
+        enabled: true
+        namespace: default
+      discovery:        all-namespaces: true
+        enabled: true
+      reload:        enabled: false
+        monitoring-config-maps: true
+        strategy: refresh
+        mode: event      loadbalancer:        enabled: false
+        
+management:  endpoint:
+    restart:      enabled: true    refresh:      enabled: true
+         
+server:  port: 8080
+    
+app:
+  version: @project.version@
+  description: Microservicio de ejemplo y pruebas de la plataforma de monitorización
+logging:
+  level:
+    root: ERROR
+    
+sentry:
+  dsn: https://b8e055049951495f80c56a33112e0a11@sentry.io/5645805
+  logging:    enabled: false
+    minimum-event-level: error
+    minimum-breadcrumb-level: error
+  enable-tracing: true
+  in-app-includes:  - com.uomicroservices.springboot.arch
+  - com.uomicroservices.springboot.ms
+
+arch:
+  configuration:
+    rest:
+      default:
+        url: https://localhost:8080
+        auth:
+          username:
+          password:
+        truststore:
+        truststore-password:
+        
+  

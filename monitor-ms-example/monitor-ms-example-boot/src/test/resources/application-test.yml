@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: MS-EXAMPLE
+  profiles:
+    active: test
+app:
+  version: @project.version@
+
+logging:
+  level:
+    root: INFO
+        
+# Remove in case of testing actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: '*'
